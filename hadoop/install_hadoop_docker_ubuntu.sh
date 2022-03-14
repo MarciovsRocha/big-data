@@ -25,19 +25,19 @@ mkdir -p ~/home/hadoop/hdfs/datanode
 # -------------------------------------
 # alter core-site.xml
 mv $HADOOP_HOME/etc/hadoop/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml_bkp
-echo "<?xml version="1.0" encoding="UTF-8"?>                    \
-<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>     \
-<configuration>                                                 \
-        <property>                                              \
-                <name>fs.defaultFS</name>                       \
-                <value>hdfs://hadoop.$(hostname):9000</value>   \
-        </property>                                             \
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>                    \
+<?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>     \
+<configuration>                                                     \
+        <property>                                                  \
+                <name>fs.defaultFS</name>                           \
+                <value>hdfs://hadoop.$(hostname):9000</value>       \
+        </property>                                                 \
 </configuration>" > $HADOOP_HOME/etc/hadoop/core-site.xml
 # -------------------------------------
 # alter hdfs-site.xml
 mv $HADOOP_HOME/etc/hadoop/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml_bkp
-echo "<?xml version="1.0" encoding="UTF-8"?>                                  \
-<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>                   \
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>                              \
+<?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>               \
 <configuration>                                                               \
         <property>                                                            \
                 <name>dfs.replication</name>                                  \
@@ -55,24 +55,24 @@ echo "<?xml version="1.0" encoding="UTF-8"?>                                  \
 # -------------------------------------
 # alter mapred-site.xml
 mv $HADOOP_HOME/etc/hadoop/mapred-site.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml_bkp
-echo "<?xml version="1.0"?>                                        \
-<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>        \
-<configuration>                                                    \
-        <property>                                                 \
-                <name>mapreduce.framework.name</name>              \
-                <value>yarn</value>                                \
-        </property>                                                \
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>                    \
+<?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>     \
+<configuration>                                                     \
+        <property>                                                  \
+                <name>mapreduce.framework.name</name>               \
+                <value>yarn</value>                                 \
+        </property>                                                 \
 </configuration>" > $HADOOP_HOME/etc/hadoop/mapred-site.xml
 # -------------------------------------
 # alter yarn-site.xml 
 mv $HADOOP_HOME/etc/hadoop/yarn-site.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml_bkp
-echo "<?xml version="1.0"?>                                        \
-<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>        \
-<configuration>                                                    \
-        <property>                                                 \
-                <name>yarn.nodemanager.aux-services</name>         \
-                <value>mapreduce_shuffle</value>                   \
-        </property>                                                \
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>                    \
+<?xml-stylesheet type=\"text/xsl\" href=\"configuration.xsl\"?>     \
+<configuration>                                                     \
+        <property>                                                  \
+                <name>yarn.nodemanager.aux-services</name>          \
+                <value>mapreduce_shuffle</value>                    \
+        </property>                                                 \
 </configuration>" > $HADOOP_HOME/etc/hadoop/yarn-site.xml
 # -------------------------------------
 # start hadoop cluster
