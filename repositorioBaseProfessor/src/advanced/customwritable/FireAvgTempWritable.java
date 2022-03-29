@@ -29,12 +29,12 @@ public class FireAvgTempWritable  implements WritableComparable<FireAvgTempWrita
 
     public FireAvgTempWritable(){}
 
-    public IntWritable getN() {
-        return new IntWritable(n);
+    public int getN() {
+        return n;
     }
 
-    public DoubleWritable getSum() {
-        return new DoubleWritable(sum);
+    public double getSum() {
+        return sum;
     }
 
     public void setN(int n) {

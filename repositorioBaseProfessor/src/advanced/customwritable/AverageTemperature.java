@@ -30,6 +30,18 @@ public class AverageTemperature {
         // criacao do job e seu nome
         Job j = new Job(c, "media");
 
+        j.setJarByClass(AverageTemperature.class);           // define a classe principal
+        j.setMapperClass(MapForAverage.class);               // define a classe que contem o mapper
+        j.setCombinerClass(CombineForAverage.class);         // define a classe que contem o combiner
+        j.setReducerClass(ReduceForAverage.class);           // define a classe que contem o reducer
+        j.setMapOutputKeyClass(Text.class);                  // define a classe da chave de output do mapper
+        j.setMapOutputValueClass(FireAvgTempWritable.class); // define a classe do valor de output do mapper
+        j.setOutputKeyClass(Text.class);                     // define a classe da chave de output do reducer
+        j.setOutputValueClass(DoubleWritable.class);         // define a classe do valor de output do reducer
+
+        FileInputFormat.addInputPath(j, input);              // define o caminho de input (localização do arquivo)
+        FileOutputFormat.setOutputPath(j, output);           // define o caminho de output (localização de exportação)
+
         // lanca o job e aguarda sua execucao
         System.exit(j.waitForCompletion(true) ? 0 : 1);
     }
@@ -51,15 +63,34 @@ public class AverageTemperature {
         }
     }
 
-    public static class ReduceForAverage extends Reducer<Text, FireAvgTempWritable, Text, FloatWritable> {
+    public static class CombineForAverage extends Reducer<Text, FireAvgTempWritable, Text, FireAvgTempWritable>{
+        public void reduce(Text key, Iterable<FireAvgTempWritable> values, Context con)
+                throws IOException, InterruptedException{
+            // o objetivo
+            int totalN=0;
+            double totalSoma=0.0;
+            for (FireAvgTempWritable o : values){
+                totalN += o.getN();
+                totalSoma += o.getSum();
+            }
+            // enviando do combiner para o sort/shuffle
+            con.write(key, new FireAvgTempWritable(totalN,totalSoma));
+        }
+    }
+
+    public static class ReduceForAverage extends Reducer<Text, FireAvgTempWritable, Text, DoubleWritable> {
         public void reduce(Text key, Iterable<FireAvgTempWritable> values, Context con)
                 throws IOException, InterruptedException {
-            // recebe chave e lista de valores
-            // (chave="media, [...])
-            // cada valor é um objeti (n,soma)
-            // somar os N's
-            // somar as somas
-            // media somas/N's
+
+            int nTotal = 0;
+            double somaTotal = 0.0;
+            for (FireAvgTempWritable o : values){
+                nTotal += o.getN();
+                somaTotal += o.getSum();
+            }
+            double media = somaTotal/nTotal;
+            con.write(key,new DoubleWritable(media));
+
         }
     }
 
