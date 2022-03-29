@@ -1,0 +1,14 @@
+Column headers
+0: X
+1: Y
+2: month
+3: day
+4: FFMC
+5: DMC
+6: DC
+7: ISI
+8: temp
+9: Relative Humidity
+10: wind speed in km/h
+11: rain in mm/m2
+13: burned area of the forest
