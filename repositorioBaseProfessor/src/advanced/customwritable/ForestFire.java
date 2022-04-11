@@ -36,6 +36,10 @@ public class ForestFire {
     public class ForestFireMapper extends Mapper<Object, Text, Text, ForestFireWritable> {
         public void map(Object key, Text value, Context context) throws IOException,
                 InterruptedException {
+            String[] campos = value.toString().split(",");
+            String mes = campos[2];
+            double temp = Double.parseDouble(campos[8]);
+            //double wind = Double.parseDouble();
 
         }
     }

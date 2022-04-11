@@ -36,10 +36,22 @@ public class EntropyFASTA {
 
     }
 
+    /*
+    * TODO
+    *  Criar uma classe hashmap para caracteres
+    *  primeira etapa para cada linha criar várias instnâncias e passar para o reduce da primeira etapa
+    *  reduce da primeira etapa faz a totalização e passa para o map da segunda etapa
+    *  map da segunda etapa calcula a probabilidade de cada caracter e passa para o reduce da segunda etapa
+    *  reduce da segunda etapa calcula a entropia por caracter recebido
+    * */
 
     public static class MapEtapaA extends Mapper<LongWritable, Text, Text, LongWritable> {
         public void map(LongWritable key, Text value, Context con)
                 throws IOException, InterruptedException {
+            // instancia a hasmap aqui
+            for (char c : value.toString().toCharArray()){
+                // hashmap.add(c)
+            }
         }
     }
 
